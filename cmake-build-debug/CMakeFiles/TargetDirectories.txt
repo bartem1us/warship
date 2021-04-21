@@ -1,0 +1,4 @@
+/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/demo.dir
+/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir
