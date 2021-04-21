@@ -7,8 +7,8 @@
 namespace fs = std::filesystem;
 namespace library {
     const std::string cur = fs::current_path();
-    const std::string current_library = "/home/bartem1us/bartem1us/homework/DbEducationalDivisions";
-
+    const std::string current_library = cur ;
+//"/home/bartem1us/bartem1us/homework/DbEducationalDivisions"
 }
 
 void DbScientificDivisions::createDB(const std::string &name_, std::vector<ScientificDivisions> &data) {

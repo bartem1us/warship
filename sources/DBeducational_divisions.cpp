@@ -4,39 +4,39 @@
 #include "dop_function.h"
 #include <filesystem>
 #include <iostream>
-
+#include <stdlib.h>
 
 namespace fs = std::filesystem;
 namespace library {
     const std::string cur = fs::current_path();
-    const std::string current_library = cur+ fs::path::preferred_separator+"DbEducationalDivisions";
-
+    const std::string current_library = cur;
+//+ fs::path::preferred_separator+"DbEducationalDivisions"
 }
 
-void DbEducationalDivisions::createDB(const std::string &name_, std::vector<EducationalDivisions> &data) {
+void DbEducationalDivisions::createDB(const std::string &name_, std::map<std::string,std::vector<EducationalDivisions>> &data) {
     const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
     fs::create_directory(nameDB);
     database = data;
     std::string our_directory = nameDB + fs::path::preferred_separator + "educational.txt";
     std::ofstream Education(our_directory);
     for (size_t i = 0; i < data.size(); ++i) {
-        Education << data[i].GetName() << " Division" << std::endl;
-        Education << "FIO of manager : " << data[i].GetManager() << std::endl;
-        Education << "Number of graduated students is : " << data[i].GetGraduate_students() << std::endl;
-        Education << "Number of staff : " << data[i].GetStaff() << std::endl;
+        Education << data[name_][i].GetName() << " Division" << std::endl;
+        Education << "FIO of manager : " << data[name_][i].GetManager() << std::endl;
+        Education << "Number of graduated students is : " << data[name_][i].GetGraduate_students() << std::endl;
+        Education << "Number of staff : " << data[name_][i].GetStaff() << std::endl;
         Education << "-----------------------Information of course------------------------" << std::endl;
-        Education << "Number course : 1 " << "Number of students " << data[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[0].tuition_fee << std::endl;
-        Education << "Number course : 2 " << "Number of students " << data[i].GetCourse()[1].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[1].tuition_fee << std::endl;
-        Education << "Number course : 3 " << "Number of students " << data[i].GetCourse()[2].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[2].tuition_fee << std::endl;
-        Education << "Number course : 4 " << "Number of students " << data[i].GetCourse()[3].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[3].tuition_fee << std::endl;
-        Education << "Number course : 5 " << "Number of students " << data[i].GetCourse()[4].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[4].tuition_fee << std::endl;
-        Education << "Number course : 6 " << "Number of students " << data[i].GetCourse()[5].students << std::endl
-                  << " Tuition Fee for one student : " << data[i].GetCourse()[5].tuition_fee << std::endl;
+        Education << "Number course : 1 " << "Number of students " << data[name_][i].GetCourse()[0].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[0].tuition_fee << std::endl;
+        Education << "Number course : 2 " << "Number of students " << data[name_][i].GetCourse()[1].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[1].tuition_fee << std::endl;
+        Education << "Number course : 3 " << "Number of students " << data[name_][i].GetCourse()[2].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[2].tuition_fee << std::endl;
+        Education << "Number course : 4 " << "Number of students " << data[name_][i].GetCourse()[3].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[3].tuition_fee << std::endl;
+        Education << "Number course : 5 " << "Number of students " << data[name_][i].GetCourse()[4].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[4].tuition_fee << std::endl;
+        Education << "Number course : 6 " << "Number of students " << data[name_][i].GetCourse()[5].students << std::endl
+                  << " Tuition Fee for one student : " << data[name_][i].GetCourse()[5].tuition_fee << std::endl;
         Education << "---------------------------------------------------------------------" << std::endl;
         Education << "*********************************************************************" << std::endl;
 
@@ -49,7 +49,7 @@ void DbEducationalDivisions::createDB(const std::string &name_, std::vector<Educ
 void DbEducationalDivisions::openDB(const std::string &name_) {
     const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
     const std::string our_directory = nameDB + fs::path::preferred_separator + "educational.txt";
-    system("/home/bartem1us/bartem1us/homework/DbEducationalDivisions");
+    //system(our_directory);
 }
 
 void DbEducationalDivisions::deleteDB(const std::string &name_) {
@@ -85,26 +85,26 @@ void DbEducationalDivisions::insertDB(EducationalDivisions &division_, const std
     std::map<size_t, course_info> course1 = division_.GetCourse();
     const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
     std::string our_directory = nameDB + fs::path::preferred_separator + "educational.txt";
-    database.push_back(division_);
+    database[name_].push_back(division_);
     std::ofstream Education(our_directory);
     for (size_t i = 0; i < database.size(); ++i) {
-        Education << name_ << " Division" << std::endl;
-        Education << "FIO of manager : " << database[i].GetManager() << std::endl;
-        Education << "Number of graduated students is : " << database[i].GetGraduate_students() << std::endl;
-        Education << "Number of staff : " << database[i].GetStaff() << std::endl;
+        Education << database[name_][i].GetName() << " Division" << std::endl;
+        Education << "FIO of manager : " << database[name_][i].GetManager() << std::endl;
+        Education << "Number of graduated students is : " << database[name_][i].GetGraduate_students() << std::endl;
+        Education << "Number of staff : " << database[name_][i].GetStaff() << std::endl;
         Education << "-----------------------Information of course------------------------" << std::endl;
-        Education << "Number course : 1 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[0].tuition_fee << std::endl;
-        Education << "Number course : 2 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[1].tuition_fee << std::endl;
-        Education << "Number course : 3 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[2].tuition_fee << std::endl;
-        Education << "Number course : 4 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[3].tuition_fee << std::endl;
-        Education << "Number course : 5 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[4].tuition_fee << std::endl;
-        Education << "Number course : 6 " << "Number of students " << database[i].GetCourse()[0].students << std::endl
-                  << " Tuition Fee for one student : " << database[i].GetCourse()[5].tuition_fee << std::endl;
+        Education << "Number course : 1 " << "Number of students " << database[name_][i].GetCourse()[0].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[0].tuition_fee << std::endl;
+        Education << "Number course : 2 " << "Number of students " << database[name_][i].GetCourse()[1].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[1].tuition_fee << std::endl;
+        Education << "Number course : 3 " << "Number of students " << database[name_][i].GetCourse()[2].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[2].tuition_fee << std::endl;
+        Education << "Number course : 4 " << "Number of students " << database[name_][i].GetCourse()[3].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[3].tuition_fee << std::endl;
+        Education << "Number course : 5 " << "Number of students " << database[name_][i].GetCourse()[4].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[4].tuition_fee << std::endl;
+        Education << "Number course : 6 " << "Number of students " << database[name_][i].GetCourse()[5].students << std::endl
+                  << " Tuition Fee for one student : " << database[name_][i].GetCourse()[5].tuition_fee << std::endl;
         Education << "---------------------------------------------------------------------" << std::endl;
         Education << "*********************************************************************" << std::endl;
 
@@ -149,8 +149,8 @@ void DbEducationalDivisions::print_target(std::string &name_, std::string &name_
 }
 
 void
-DbEducationalDivisions::insertDB1(const std::string &field, const std::string &field_name, std::string &name_,
-                                  std::string &name_Division) {
+DbEducationalDivisions::insert_target(const std::string &field, const std::string &field_name, std::string &name_,
+                                      std::string &name_Division) {
     std::string *lines = nullptr;
     int count = CountLinesInFile(name_);
     GetStringsFromFileS(name_, &lines);
@@ -162,7 +162,7 @@ DbEducationalDivisions::insertDB1(const std::string &field, const std::string &f
             if (lines[i].find(name_Division) == 0) {
 
                 int number = i / del;
-                database[number].SetManager(field_name);
+                database[name_][number].SetManager(field_name);
 
 
                 ChangeStringInFileC(name_, i + 1, change_string);
@@ -175,7 +175,7 @@ DbEducationalDivisions::insertDB1(const std::string &field, const std::string &f
         {
             if (lines[i].find(name_Division) == 0) {
                 int number = i / del;
-                database[number].SetGraduate_students(std::stoi(field_name));
+                database[name_][number].SetGraduate_students(std::stoi(field_name));
                 ChangeStringInFileC(name_, i + 2, change_string);
             }
         }
@@ -186,7 +186,7 @@ DbEducationalDivisions::insertDB1(const std::string &field, const std::string &f
         {
             if (lines[i].find(name_Division) == 0) {
                 int number = i / del;
-                database[number].SetStaff(std::stoi(field_name));
+                database[name_][number].SetStaff(std::stoi(field_name));
                 ChangeStringInFileC(name_, i + 3, change_string);
             }
         }
@@ -208,7 +208,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 1);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 1);
                     ChangeStringInFileC(name_, i + 6, change_string);
                 }
             }
@@ -220,7 +220,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 2);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 2);
                     ChangeStringInFileC(name_, i + 8, change_string);
                 }
             }
@@ -232,7 +232,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 3);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 3);
                     ChangeStringInFileC(name_, i + 10, change_string);
                 }
             }
@@ -244,7 +244,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 4);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 4);
                     ChangeStringInFileC(name_, i + 12, change_string);
                 }
             }
@@ -256,7 +256,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 5);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 5);
                     ChangeStringInFileC(name_, i + 14, change_string);
                 }
             }
@@ -268,7 +268,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseTutionFee(std::stoi(field_name), 6);
+                    database[name_][number].SetCourseTutionFee(std::stoi(field_name), 6);
                     ChangeStringInFileC(name_, i + 16, change_string);
                 }
             }
@@ -282,7 +282,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 1);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 1);
                     ChangeStringInFileC(name_, i + 5, change_string);
                 }
             }
@@ -294,7 +294,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 2);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 2);
                     ChangeStringInFileC(name_, i + 7, change_string);
                 }
             }
@@ -306,7 +306,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 3);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 3);
                     ChangeStringInFileC(name_, i + 9, change_string);
                 }
             }
@@ -318,7 +318,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 4);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 4);
                     ChangeStringInFileC(name_, i + 11, change_string);
                 }
             }
@@ -330,7 +330,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 5);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 5);
                     ChangeStringInFileC(name_, i + 13, change_string);
                 }
             }
@@ -342,7 +342,7 @@ void DbEducationalDivisions::InsertCourse(const std::string &number_course, cons
             {
                 if (lines[i].find(name_Division) == 0) {
                     int number = i / del;
-                    database[number].SetCourseStudentsNumber(std::stoi(field_name), 6);
+                    database[name_][number].SetCourseStudentsNumber(std::stoi(field_name), 6);
                     ChangeStringInFileC(name_, i + 15, change_string);
                 }
             }
@@ -415,7 +415,7 @@ void DbEducationalDivisions::SortName(std::string &name_) {
     int count = CountLinesInFile(name_);
     GetStringsFromFileS(name_, &lines);
     //19
-    std::sort(database.begin(), database.end(), CompareName);
+    std::sort(database[name_].begin(), database[name_].end(), CompareName);
     deleteDB(name_);
     createDB(name_, database);
 
@@ -427,7 +427,7 @@ void DbEducationalDivisions::SortStuff(std::string &name_) {
     int count = CountLinesInFile(name_);
     GetStringsFromFileS(name_, &lines);
     //19
-    std::sort(database.begin(), database.end(), CompareNumber);
+    std::sort(database[name_].begin(), database[name_].end(), CompareNumber);
     deleteDB(name_);
     createDB(name_, database);
 }
@@ -435,17 +435,17 @@ void DbEducationalDivisions::SortStuff(std::string &name_) {
 void DbEducationalDivisions::SelectionStuff(std::string &name_, size_t number) {
     for (size_t i = 0; i < database.size(); ++i)//13 all string in 1 base
     {
-        if (database[i].GetStaff() > number) {
-            print_target(name_, database[i].GetName());
+        if (database[name_][i].GetStaff() > number) {
+            print_target(name_, database[name_][i].GetName());
         }
     }
 }
 
 void DbEducationalDivisions::SelectionIncome(std::string &name_, size_t number) {
     for (size_t i = 0; i < database.size(); ++i) {
-        double income = Calculationfunction(name_, database[i].GetName()) / database[i].GetStaff();
+        double income = Calculationfunction(name_, database[name_][i].GetName()) / database[name_][i].GetStaff();
         if (income <= number) {
-            print_target(name_, database[i].GetName());
+            print_target(name_, database[name_][i].GetName());
         }
     }
 }

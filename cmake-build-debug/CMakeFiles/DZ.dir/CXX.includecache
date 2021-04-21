@@ -16,34 +16,10 @@ algorithm
 Divisions.h
 ../include/Divisions.h
 
-../include/DBscientific_divisions.h
-scientific_divisions.h
--
-Divisions.h
-../include/Divisions.h
-vector
--
-iostream
--
-algorithm
--
-string
--
-filesystem
--
-
 ../include/Divisions.h
 iostream
 -
 string
--
-
-../include/Intruction.h
-DBeducational_divisions.h
-../include/DBeducational_divisions.h
-DBscientific_divisions.h
-../include/DBscientific_divisions.h
-iostream
 -
 
 ../include/dop_function.h
@@ -64,16 +40,6 @@ filesystem
 map
 -
 
-../include/scientific_divisions.h
-string
--
-iostream
--
-map
--
-vector
--
-
 /home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.cpp
 DBeducational_divisions.h
 /home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.h
@@ -85,16 +51,6 @@ filesystem
 -
 iostream
 -
-
-/home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.cpp
-DBscientific_divisions.h
-/home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.h
-dop_function.h
-/home/bartem1us/bartem1us/homework/sources/dop_function.h
-scientific_divisions.h
-/home/bartem1us/bartem1us/homework/sources/scientific_divisions.h
-
-/home/bartem1us/bartem1us/homework/sources/Intruction.cpp
-Intruction.h
-/home/bartem1us/bartem1us/homework/sources/Intruction.h
+stdlib.h
+-
 

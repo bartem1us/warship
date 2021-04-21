@@ -1,12 +1,21 @@
 //
 // Created by bartem1us on 18.04.2021.
 #include "dop_function.h"
+#include <filesystem>
+#include <iostream>
+#include <stdlib.h>
 
+namespace fs = std::filesystem;
+namespace library {
+    const std::string cur = fs::current_path();
+    const std::string current_library = cur;
+//+ fs::path::preferred_separator+"DbEducationalDivisions"
+}
 // - _lines - список строк файла типа (string*).
 // Функция возвращает общее количество прочитанных строк.
 int CountLinesInFile(std::string &name_) {
-    std::string filename =
-            "/home/bartem1us/bartem1us/homework/DbEducationalDivisions/" + name_ + "/educational.txt";
+    const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
+    std::string filename = nameDB + fs::path::preferred_separator + "educational.txt";
     // 1. Объявить экземпляр F, который связан с файлом filename.
     // Файл открывается для чтения в текстовом формате.
     std::ifstream F(filename, std::ios::in);
@@ -41,8 +50,8 @@ int CountLinesInFile(std::string &name_) {
 
 int GetStringsFromFileS(std::string name_, std::string **_lines) {
     // 1. Дополнительные переменные
-    std::string filename =
-            "/home/bartem1us/bartem1us/homework/DbEducationalDivisions/" + name_ + "/educational.txt";
+    const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
+    std::string filename = nameDB + fs::path::preferred_separator + "educational.txt";
     // 1. Дополнительные переменные
     std::string* lines; // временный список строк
     int n = CountLinesInFile(name_); // Получить количество строк в файле
@@ -101,8 +110,8 @@ int GetStringsFromFileS(std::string name_, std::string **_lines) {
 // Функция возвращает true, если запись строк произошла успешно.
 bool SetStringsToFileS(std::string name_, std::string *lines, int count) {
     // 1. Объявить дополнительные переменные
-    std::string filename =
-            "/home/bartem1us/bartem1us/homework/DbEducationalDivisions/" + name_ + "/educational.txt";
+    const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
+    std::string filename = nameDB + fs::path::preferred_separator + "educational.txt";
     std::ofstream F(filename); // открыть файл для записи
 
     // 2. Проверка, успешно ли открылся файл
@@ -169,11 +178,10 @@ bool RemoveStringFromFileByIndex(std::string &name_, int position) {
 int GetStringsFromFileC(std::string name_, char*** _lines)
 {
     // 1. Дополнительные переменные
-    _lines= nullptr;
     char** lines;
     int n = CountLinesInFile(name_); // получить количество строк в файле
-    std::string filename =
-            "/home/bartem1us/bartem1us/homework/DbEducationalDivisions/" + name_ + "/educational.txt";
+    const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
+    std::string filename = nameDB + fs::path::preferred_separator + "educational.txt";
     // 2. Проверка, известно ли количество строк
     if (n == -1) return -1;
 
@@ -230,8 +238,8 @@ bool ChangeStringInFileC(std::string name_, int position, std::string str)
     char** lines; // список строк файла
     int count; // количество строк файла
     count = GetStringsFromFileC(name_, &lines); // получить список lines
-    std::string filename =
-            "/home/bartem1us/bartem1us/homework/DbEducationalDivisions/" + name_ + "/educational.txt";
+    const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
+    std::string filename = nameDB + fs::path::preferred_separator + "educational.txt";
     // 2. Проверка, корректно ли прочитан файл
     if (count < 0) return false;
 
