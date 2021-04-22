@@ -37,7 +37,7 @@ public:
 
     int Calculationfunction(std::string &name_, std::string &name_DB);
 
-    std::string &FindFIO(std::string &name_, std::string &name_DB);
+    std::string &FindFIO(std::string &name_, std::string &FIO);
 
     void SortName(std::string &name_);
 

@@ -49,6 +49,8 @@ void DbEducationalDivisions::createDB(const std::string &name_, std::map<std::st
 void DbEducationalDivisions::openDB(const std::string &name_) {
     const std::string nameDB = library::current_library + fs::path::preferred_separator + name_;
     const std::string our_directory = nameDB + fs::path::preferred_separator + "educational.txt";
+    std::ofstream Education;
+    Education.open(our_directory,std::ofstream::app);
     //system(our_directory);
 }
 
@@ -87,7 +89,7 @@ void DbEducationalDivisions::insertDB(EducationalDivisions &division_, const std
     std::string our_directory = nameDB + fs::path::preferred_separator + "educational.txt";
     database[name_].push_back(division_);
     std::ofstream Education(our_directory);
-    for (size_t i = 0; i < database.size(); ++i) {
+    for (size_t i = 0; i < database[name_].size(); ++i) {
         Education << database[name_][i].GetName() << " Division" << std::endl;
         Education << "FIO of manager : " << database[name_][i].GetManager() << std::endl;
         Education << "Number of graduated students is : " << database[name_][i].GetGraduate_students() << std::endl;
@@ -141,7 +143,7 @@ void DbEducationalDivisions::print_target(std::string &name_, std::string &name_
         if (lines[i].find(name_Divisons) == 0) {
             kar = i;
             for (size_t k = kar; k < kar + 13; ++k) {
-                std::cout << lines[k];
+                std::cout << lines[k]<<std::endl;
             }
 
         }
@@ -433,7 +435,7 @@ void DbEducationalDivisions::SortStuff(std::string &name_) {
 }
 
 void DbEducationalDivisions::SelectionStuff(std::string &name_, size_t number) {
-    for (size_t i = 0; i < database.size(); ++i)//13 all string in 1 base
+    for (size_t i = 0; i < database[name_].size(); ++i)//13 all string in 1 base
     {
         if (database[name_][i].GetStaff() > number) {
             print_target(name_, database[name_][i].GetName());
@@ -442,7 +444,7 @@ void DbEducationalDivisions::SelectionStuff(std::string &name_, size_t number) {
 }
 
 void DbEducationalDivisions::SelectionIncome(std::string &name_, size_t number) {
-    for (size_t i = 0; i < database.size(); ++i) {
+    for (size_t i = 0; i < database[name_].size(); ++i) {
         double income = Calculationfunction(name_, database[name_][i].GetName()) / database[name_][i].GetStaff();
         if (income <= number) {
             print_target(name_, database[name_][i].GetName());

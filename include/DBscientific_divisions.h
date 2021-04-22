@@ -11,9 +11,9 @@
 
 class DbScientificDivisions:public Divisions2{
 private:
-    std::vector<ScientificDivisions> databaseSD;
+    std::map<std::string,std::vector<ScientificDivisions>> databaseSD;
 public:
-    void createDB(const std::string &name_, std::vector<ScientificDivisions> &data);
+    void createDB(const std::string &name_, std::map<std::string,std::vector<ScientificDivisions>> &data);
 
     void printDB(const std::string &name_);
 
@@ -28,7 +28,7 @@ public:
     void insertDB(ScientificDivisions &division_, const std::string &name_);
 
     void InsertCourse(const std::string &Field_change, const std::string &new_field,
-                 std::string &name_, std::string &name_Division,std::string &field_project);
+                 std::string &name_, std::string &name_Division);
 
     void
     insertField(const std::string &field, const std::string &field_name, std::string &name_, std::string &name_Division);
