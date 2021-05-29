@@ -1,2 +1,0 @@
-/usr/bin/ar qc libRK1_TIMP.a CMakeFiles/RK1_TIMP.dir/sources/educational_divisions.cpp.o
-/usr/bin/ranlib libRK1_TIMP.a

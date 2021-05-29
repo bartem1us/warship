@@ -58,38 +58,73 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/149/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/151/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/149/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/151/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bartem1us/bartem1us/homework
+CMAKE_SOURCE_DIR = /home/bartem1us/bartem1us/warship
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bartem1us/bartem1us/homework/cmake-build-debug
+CMAKE_BINARY_DIR = /home/bartem1us/bartem1us/warship/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/149/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
-.PHONY : edit_cache/fast
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/149/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/151/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -97,11 +132,22 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/snap/clion/151/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles /home/bartem1us/bartem1us/homework/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles /home/bartem1us/bartem1us/warship/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -155,194 +201,59 @@ DZ/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/build
 .PHONY : DZ/fast
 
-examples/demo.o: examples/demo.cpp.o
+demo/main.o: demo/main.cpp.o
 
-.PHONY : examples/demo.o
-
-# target to build an object file
-examples/demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/examples/demo.cpp.o
-.PHONY : examples/demo.cpp.o
-
-examples/demo.i: examples/demo.cpp.i
-
-.PHONY : examples/demo.i
-
-# target to preprocess a source file
-examples/demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/examples/demo.cpp.i
-.PHONY : examples/demo.cpp.i
-
-examples/demo.s: examples/demo.cpp.s
-
-.PHONY : examples/demo.s
-
-# target to generate assembly for a file
-examples/demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/examples/demo.cpp.s
-.PHONY : examples/demo.cpp.s
-
-sources/DBeducational_divisions.o: sources/DBeducational_divisions.cpp.o
-
-.PHONY : sources/DBeducational_divisions.o
+.PHONY : demo/main.o
 
 # target to build an object file
-sources/DBeducational_divisions.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o
-.PHONY : sources/DBeducational_divisions.cpp.o
+demo/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demo/main.cpp.o
+.PHONY : demo/main.cpp.o
 
-sources/DBeducational_divisions.i: sources/DBeducational_divisions.cpp.i
+demo/main.i: demo/main.cpp.i
 
-.PHONY : sources/DBeducational_divisions.i
+.PHONY : demo/main.i
 
 # target to preprocess a source file
-sources/DBeducational_divisions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.i
-.PHONY : sources/DBeducational_divisions.cpp.i
+demo/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demo/main.cpp.i
+.PHONY : demo/main.cpp.i
 
-sources/DBeducational_divisions.s: sources/DBeducational_divisions.cpp.s
+demo/main.s: demo/main.cpp.s
 
-.PHONY : sources/DBeducational_divisions.s
+.PHONY : demo/main.s
 
 # target to generate assembly for a file
-sources/DBeducational_divisions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.s
-.PHONY : sources/DBeducational_divisions.cpp.s
+demo/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demo/main.cpp.s
+.PHONY : demo/main.cpp.s
 
-sources/DBscientific_divisions.o: sources/DBscientific_divisions.cpp.o
+sources/game_ship.o: sources/game_ship.cpp.o
 
-.PHONY : sources/DBscientific_divisions.o
+.PHONY : sources/game_ship.o
 
 # target to build an object file
-sources/DBscientific_divisions.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o
-.PHONY : sources/DBscientific_divisions.cpp.o
+sources/game_ship.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/game_ship.cpp.o
+.PHONY : sources/game_ship.cpp.o
 
-sources/DBscientific_divisions.i: sources/DBscientific_divisions.cpp.i
+sources/game_ship.i: sources/game_ship.cpp.i
 
-.PHONY : sources/DBscientific_divisions.i
-
-# target to preprocess a source file
-sources/DBscientific_divisions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.i
-.PHONY : sources/DBscientific_divisions.cpp.i
-
-sources/DBscientific_divisions.s: sources/DBscientific_divisions.cpp.s
-
-.PHONY : sources/DBscientific_divisions.s
-
-# target to generate assembly for a file
-sources/DBscientific_divisions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.s
-.PHONY : sources/DBscientific_divisions.cpp.s
-
-sources/Intruction.o: sources/Intruction.cpp.o
-
-.PHONY : sources/Intruction.o
-
-# target to build an object file
-sources/Intruction.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/Intruction.cpp.o
-.PHONY : sources/Intruction.cpp.o
-
-sources/Intruction.i: sources/Intruction.cpp.i
-
-.PHONY : sources/Intruction.i
+.PHONY : sources/game_ship.i
 
 # target to preprocess a source file
-sources/Intruction.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/Intruction.cpp.i
-.PHONY : sources/Intruction.cpp.i
+sources/game_ship.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/game_ship.cpp.i
+.PHONY : sources/game_ship.cpp.i
 
-sources/Intruction.s: sources/Intruction.cpp.s
+sources/game_ship.s: sources/game_ship.cpp.s
 
-.PHONY : sources/Intruction.s
-
-# target to generate assembly for a file
-sources/Intruction.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/Intruction.cpp.s
-.PHONY : sources/Intruction.cpp.s
-
-sources/dop_function.o: sources/dop_function.cpp.o
-
-.PHONY : sources/dop_function.o
-
-# target to build an object file
-sources/dop_function.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/dop_function.cpp.o
-.PHONY : sources/dop_function.cpp.o
-
-sources/dop_function.i: sources/dop_function.cpp.i
-
-.PHONY : sources/dop_function.i
-
-# target to preprocess a source file
-sources/dop_function.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/dop_function.cpp.i
-.PHONY : sources/dop_function.cpp.i
-
-sources/dop_function.s: sources/dop_function.cpp.s
-
-.PHONY : sources/dop_function.s
+.PHONY : sources/game_ship.s
 
 # target to generate assembly for a file
-sources/dop_function.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/dop_function.cpp.s
-.PHONY : sources/dop_function.cpp.s
-
-sources/educational_divisions.o: sources/educational_divisions.cpp.o
-
-.PHONY : sources/educational_divisions.o
-
-# target to build an object file
-sources/educational_divisions.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o
-.PHONY : sources/educational_divisions.cpp.o
-
-sources/educational_divisions.i: sources/educational_divisions.cpp.i
-
-.PHONY : sources/educational_divisions.i
-
-# target to preprocess a source file
-sources/educational_divisions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/educational_divisions.cpp.i
-.PHONY : sources/educational_divisions.cpp.i
-
-sources/educational_divisions.s: sources/educational_divisions.cpp.s
-
-.PHONY : sources/educational_divisions.s
-
-# target to generate assembly for a file
-sources/educational_divisions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/educational_divisions.cpp.s
-.PHONY : sources/educational_divisions.cpp.s
-
-sources/scientific_divisions.o: sources/scientific_divisions.cpp.o
-
-.PHONY : sources/scientific_divisions.o
-
-# target to build an object file
-sources/scientific_divisions.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o
-.PHONY : sources/scientific_divisions.cpp.o
-
-sources/scientific_divisions.i: sources/scientific_divisions.cpp.i
-
-.PHONY : sources/scientific_divisions.i
-
-# target to preprocess a source file
-sources/scientific_divisions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.i
-.PHONY : sources/scientific_divisions.cpp.i
-
-sources/scientific_divisions.s: sources/scientific_divisions.cpp.s
-
-.PHONY : sources/scientific_divisions.s
-
-# target to generate assembly for a file
-sources/scientific_divisions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.s
-.PHONY : sources/scientific_divisions.cpp.s
+sources/game_ship.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DZ.dir/build.make CMakeFiles/DZ.dir/sources/game_ship.cpp.s
+.PHONY : sources/game_ship.cpp.s
 
 # Help Target
 help:
@@ -351,30 +262,19 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... DZ"
 	@echo "... demo"
-	@echo "... examples/demo.o"
-	@echo "... examples/demo.i"
-	@echo "... examples/demo.s"
-	@echo "... sources/DBeducational_divisions.o"
-	@echo "... sources/DBeducational_divisions.i"
-	@echo "... sources/DBeducational_divisions.s"
-	@echo "... sources/DBscientific_divisions.o"
-	@echo "... sources/DBscientific_divisions.i"
-	@echo "... sources/DBscientific_divisions.s"
-	@echo "... sources/Intruction.o"
-	@echo "... sources/Intruction.i"
-	@echo "... sources/Intruction.s"
-	@echo "... sources/dop_function.o"
-	@echo "... sources/dop_function.i"
-	@echo "... sources/dop_function.s"
-	@echo "... sources/educational_divisions.o"
-	@echo "... sources/educational_divisions.i"
-	@echo "... sources/educational_divisions.s"
-	@echo "... sources/scientific_divisions.o"
-	@echo "... sources/scientific_divisions.i"
-	@echo "... sources/scientific_divisions.s"
+	@echo "... demo/main.o"
+	@echo "... demo/main.i"
+	@echo "... demo/main.s"
+	@echo "... sources/game_ship.o"
+	@echo "... sources/game_ship.i"
+	@echo "... sources/game_ship.s"
 .PHONY : help
 
 

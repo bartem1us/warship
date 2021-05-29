@@ -1,4 +1,8 @@
-/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/demo.dir
-/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/install/local.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/install.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/demo.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/DZ.dir
+/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/edit_cache.dir

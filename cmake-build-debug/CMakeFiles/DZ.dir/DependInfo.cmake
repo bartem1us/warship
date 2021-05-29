@@ -4,12 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o"
-  "/home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o"
-  "/home/bartem1us/bartem1us/homework/sources/Intruction.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/Intruction.cpp.o"
-  "/home/bartem1us/bartem1us/homework/sources/dop_function.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/dop_function.cpp.o"
-  "/home/bartem1us/bartem1us/homework/sources/educational_divisions.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o"
-  "/home/bartem1us/bartem1us/homework/sources/scientific_divisions.cpp" "/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o"
+  "/home/bartem1us/bartem1us/warship/sources/game_ship.cpp" "/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/DZ.dir/sources/game_ship.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

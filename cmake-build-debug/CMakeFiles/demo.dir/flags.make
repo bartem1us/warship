@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/bartem1us/bartem1us/homework/include
+CXX_INCLUDES = -I/home/bartem1us/bartem1us/warship/include
 
 CXX_FLAGS = -g -std=gnu++17
 

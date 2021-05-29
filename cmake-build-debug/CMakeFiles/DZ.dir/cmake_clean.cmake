@@ -1,10 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o"
-  "CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o"
-  "CMakeFiles/DZ.dir/sources/Intruction.cpp.o"
-  "CMakeFiles/DZ.dir/sources/dop_function.cpp.o"
-  "CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o"
-  "CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o"
+  "CMakeFiles/DZ.dir/sources/game_ship.cpp.o"
   "libDZ.a"
   "libDZ.pdb"
 )

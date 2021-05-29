@@ -53,19 +53,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/149/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/151/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/149/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/151/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bartem1us/bartem1us/homework
+CMAKE_SOURCE_DIR = /home/bartem1us/bartem1us/warship
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bartem1us/bartem1us/homework/cmake-build-debug
+CMAKE_BINARY_DIR = /home/bartem1us/bartem1us/warship/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/DZ.dir/depend.make
@@ -76,105 +76,30 @@ include CMakeFiles/DZ.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/DZ.dir/flags.make
 
-CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o: ../sources/educational_divisions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o -c /home/bartem1us/bartem1us/homework/sources/educational_divisions.cpp
+CMakeFiles/DZ.dir/sources/game_ship.cpp.o: CMakeFiles/DZ.dir/flags.make
+CMakeFiles/DZ.dir/sources/game_ship.cpp.o: ../sources/game_ship.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/DZ.dir/sources/game_ship.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/game_ship.cpp.o -c /home/bartem1us/bartem1us/warship/sources/game_ship.cpp
 
-CMakeFiles/DZ.dir/sources/educational_divisions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/educational_divisions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/educational_divisions.cpp > CMakeFiles/DZ.dir/sources/educational_divisions.cpp.i
+CMakeFiles/DZ.dir/sources/game_ship.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/game_ship.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/warship/sources/game_ship.cpp > CMakeFiles/DZ.dir/sources/game_ship.cpp.i
 
-CMakeFiles/DZ.dir/sources/educational_divisions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/educational_divisions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/educational_divisions.cpp -o CMakeFiles/DZ.dir/sources/educational_divisions.cpp.s
-
-CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o: ../sources/scientific_divisions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o -c /home/bartem1us/bartem1us/homework/sources/scientific_divisions.cpp
-
-CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/scientific_divisions.cpp > CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.i
-
-CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/scientific_divisions.cpp -o CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.s
-
-CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o: ../sources/DBscientific_divisions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o -c /home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.cpp
-
-CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.cpp > CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.i
-
-CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/DBscientific_divisions.cpp -o CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.s
-
-CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o: ../sources/DBeducational_divisions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o -c /home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.cpp
-
-CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.cpp > CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.i
-
-CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/DBeducational_divisions.cpp -o CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.s
-
-CMakeFiles/DZ.dir/sources/Intruction.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/Intruction.cpp.o: ../sources/Intruction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DZ.dir/sources/Intruction.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/Intruction.cpp.o -c /home/bartem1us/bartem1us/homework/sources/Intruction.cpp
-
-CMakeFiles/DZ.dir/sources/Intruction.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/Intruction.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/Intruction.cpp > CMakeFiles/DZ.dir/sources/Intruction.cpp.i
-
-CMakeFiles/DZ.dir/sources/Intruction.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/Intruction.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/Intruction.cpp -o CMakeFiles/DZ.dir/sources/Intruction.cpp.s
-
-CMakeFiles/DZ.dir/sources/dop_function.cpp.o: CMakeFiles/DZ.dir/flags.make
-CMakeFiles/DZ.dir/sources/dop_function.cpp.o: ../sources/dop_function.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DZ.dir/sources/dop_function.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DZ.dir/sources/dop_function.cpp.o -c /home/bartem1us/bartem1us/homework/sources/dop_function.cpp
-
-CMakeFiles/DZ.dir/sources/dop_function.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DZ.dir/sources/dop_function.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bartem1us/bartem1us/homework/sources/dop_function.cpp > CMakeFiles/DZ.dir/sources/dop_function.cpp.i
-
-CMakeFiles/DZ.dir/sources/dop_function.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/dop_function.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/homework/sources/dop_function.cpp -o CMakeFiles/DZ.dir/sources/dop_function.cpp.s
+CMakeFiles/DZ.dir/sources/game_ship.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DZ.dir/sources/game_ship.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bartem1us/bartem1us/warship/sources/game_ship.cpp -o CMakeFiles/DZ.dir/sources/game_ship.cpp.s
 
 # Object files for target DZ
 DZ_OBJECTS = \
-"CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o" \
-"CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o" \
-"CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o" \
-"CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o" \
-"CMakeFiles/DZ.dir/sources/Intruction.cpp.o" \
-"CMakeFiles/DZ.dir/sources/dop_function.cpp.o"
+"CMakeFiles/DZ.dir/sources/game_ship.cpp.o"
 
 # External object files for target DZ
 DZ_EXTERNAL_OBJECTS =
 
-libDZ.a: CMakeFiles/DZ.dir/sources/educational_divisions.cpp.o
-libDZ.a: CMakeFiles/DZ.dir/sources/scientific_divisions.cpp.o
-libDZ.a: CMakeFiles/DZ.dir/sources/DBscientific_divisions.cpp.o
-libDZ.a: CMakeFiles/DZ.dir/sources/DBeducational_divisions.cpp.o
-libDZ.a: CMakeFiles/DZ.dir/sources/Intruction.cpp.o
-libDZ.a: CMakeFiles/DZ.dir/sources/dop_function.cpp.o
+libDZ.a: CMakeFiles/DZ.dir/sources/game_ship.cpp.o
 libDZ.a: CMakeFiles/DZ.dir/build.make
 libDZ.a: CMakeFiles/DZ.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libDZ.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libDZ.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/DZ.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DZ.dir/link.txt --verbose=$(VERBOSE)
 
@@ -188,6 +113,6 @@ CMakeFiles/DZ.dir/clean:
 .PHONY : CMakeFiles/DZ.dir/clean
 
 CMakeFiles/DZ.dir/depend:
-	cd /home/bartem1us/bartem1us/homework/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bartem1us/bartem1us/homework /home/bartem1us/bartem1us/homework /home/bartem1us/bartem1us/homework/cmake-build-debug /home/bartem1us/bartem1us/homework/cmake-build-debug /home/bartem1us/bartem1us/homework/cmake-build-debug/CMakeFiles/DZ.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/bartem1us/bartem1us/warship/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bartem1us/bartem1us/warship /home/bartem1us/bartem1us/warship /home/bartem1us/bartem1us/warship/cmake-build-debug /home/bartem1us/bartem1us/warship/cmake-build-debug /home/bartem1us/bartem1us/warship/cmake-build-debug/CMakeFiles/DZ.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/DZ.dir/depend
 
