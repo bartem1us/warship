@@ -37,5 +37,8 @@ Insert - поменять расположение корабля (горизо�
 ### ИГРА
 
 "+" - выстрелить в данную клетку поля
+## SCREEN SHOTS OF GAME
 
+![alt text](screen_shots/2.png) ![alt text](screen_shots/3.png)
 
+![alt text](screen_shots/1.png)

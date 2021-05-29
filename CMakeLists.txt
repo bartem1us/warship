@@ -13,7 +13,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 add_library(${PROJECT_NAME} STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/
- include/game_ship.h sources/game_ship.cpp)
+ include/game_ship.h sources/game_ship.cpp include/intellegent_bot.h)
 
 add_executable(demo
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp)

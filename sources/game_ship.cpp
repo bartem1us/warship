@@ -51,13 +51,19 @@ void game_field::display() {
 void game_field::def() {
     visible_field.resize(10);
     my_field.resize(10);
+    shoot_field.resize(10);
+    enemy_field.resize(10);
 
     for (size_t i = 0; i < visible_field.size(); ++i) {
         visible_field[i].resize(10);
         my_field[i].resize(10);
+        shoot_field[i].resize(10);
+        enemy_field[i].resize(10);
         for (size_t k = 0; k < visible_field[i].size(); ++k) {
             visible_field[i][k] = '-';
             my_field[i][k] = '-';
+            shoot_field[i][k]='-';
+            enemy_field[i][k]='-';
         }
     }
 }
@@ -176,9 +182,9 @@ void game_field::move_right_ship_horizontal(size_t i) {
     }
 }
 
-void game_field::my_display() {
+void game_field::my_display(int wide) {
     refresh();
-    WINDOW *win = newwin(23, 41, 0, 60);
+    WINDOW *win = newwin(23, 41, 0, wide);
     box(win, 0, 0);
     start_color();
     init_pair(1, COLOR_BLUE, A_NORMAL);
@@ -395,7 +401,7 @@ void game_field::move_ship(size_t i) {
                             my_field[y + k][x] = visible_field[y + k][x];
                         }
                         pos=false;
-                        my_display();
+                        my_display(60);
                         break;
                     } else { break; }
                 }
@@ -436,7 +442,7 @@ void game_field::move_ship(size_t i) {
                         for (size_t k = 0; k < i; ++k) {
                             my_field[y][x + k] = visible_field[y][x + k];
                         }
-                        my_display();
+                        my_display(60);
                         pos=false;
                         break;
                     } else { break; }
@@ -444,4 +450,170 @@ void game_field::move_ship(size_t i) {
             }
         }
     }
+
+}
+
+
+void game_field::shoot_display() {
+    refresh();
+    WINDOW *win = newwin(23, 41, 0, 60);
+    box(win, 0, 0);
+    start_color();
+    init_pair(1, COLOR_BLUE, A_NORMAL);
+    wattron(win, COLOR_PAIR(1));
+
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+
+            if (i == x && j == y) {
+                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", shoot_field[i][j]);
+
+            } else {
+                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", shoot_field[i][j]);
+            }
+        }
+    }
+    use_default_colors();
+    wrefresh(win);//
+    delwin(win);//
+}
+void game_field::move_shoot_up() {
+    if (y != 0) {
+        --y;
+    }
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            visible_field[i][k] = '-';
+        }
+    }
+        visible_field[y][x] = 'x';
+
+}
+void game_field::move_shoot_down()
+{
+    if (y != 9) {
+        ++y;
+    }
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            visible_field[i][k] = '-';
+        }
+    }
+        visible_field[y][x] = 'x';
+}
+void game_field::move_shoot_right() {
+    if (x != 9) {
+        ++x;
+    }
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            visible_field[i][k] = '-';
+        }
+    }
+        visible_field[y][x] = 'x';
+
+}
+void game_field::move_shoot_left()
+{
+    if (x != 0) {
+        --x;
+    }
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            visible_field[i][k] = '-';
+        }
+    }
+        visible_field[y][x] = 'x';
+
+}
+void game_field::shoot() {
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            visible_field[i][k] = '-';
+        }
+    }
+    bool pos = true;
+    while (pos != false) {
+        int key = getch();
+        switch (key) {
+            case KEY_UP: {
+                move_shoot_up();
+                display();
+                break;
+            }
+            case KEY_DOWN: {
+                move_shoot_down();
+                display();
+                break;
+            }
+            case KEY_RIGHT: {
+                move_shoot_right();
+                display();
+                break;
+            }
+            case KEY_LEFT: {
+                move_shoot_left();
+                display();
+                break;
+            }
+            case '+':
+            {
+                size_t win = 0 ;
+                if(enemy_field[y][x]== 'O')
+                {
+                    shoot_field[y][x]='X';
+                    shoot_display();
+                    break;
+                }
+                if(enemy_field[y][x]== '-')
+                {
+                    shoot_field[y][x]='*';
+                    shoot_display();
+                    break;
+                }
+                for (size_t i = 0; i < shoot_field.size(); ++i) {
+                    for (size_t k = 0; k < shoot_field[i].size(); ++k) {
+                        if(shoot_field[i][k]=='X'){
+                            ++win;
+                        }
+                    }
+                }
+                if(win==20){
+
+                }
+                break;
+            }
+        }
+    }
+}
+void game_field::intellegent_desk() {
+    for(size_t i = 0 ; i <4  ; ++i)
+    {
+        enemy_field[0][i]='O';
+    }
+    for(size_t i = 0 ; i <3  ; ++i)
+    {
+        enemy_field[0][5+i]='0';
+    }
+    for(size_t i = 0 ; i <3  ; ++i)
+    {
+        enemy_field[2][i]='0';
+    }
+    for(size_t i = 0 ; i <2  ; ++i)
+    {
+        enemy_field[2][i+4]='0';
+    }
+    for(size_t i = 0 ; i <2  ; ++i)
+    {
+        enemy_field[2][i+7]='0';
+    }
+    for(size_t i = 0 ; i <2  ; ++i)
+    {
+        enemy_field[i+4][0]='0';
+    }
+    enemy_field[9][9]='O';
+    enemy_field[7][7]='O';
+    enemy_field[9][0]='O';
+    enemy_field[9][3]='O';
+
 }

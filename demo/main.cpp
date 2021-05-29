@@ -17,7 +17,7 @@ int main()
     refresh();
     keypad(stdscr, true);
     first.display();
-    first.my_display();
+    first.my_display(60);
     first.move_ship(4);
     first.move_ship(3);
     first.move_ship(3);
@@ -28,6 +28,10 @@ int main()
     first.move_ship(1);
     first.move_ship(1);
     first.move_ship(1);
+    first.my_display(120);
+    first.shoot_display();
+    first.intellegent_desk();
+    first.shoot();
 
     getch();
 getch();

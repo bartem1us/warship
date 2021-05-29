@@ -179,6 +179,9 @@
 		<Unit filename="/home/bartem1us/bartem1us/warship/include/game_ship.h">
 			<Option target="DZ"/>
 		</Unit>
+		<Unit filename="/home/bartem1us/bartem1us/warship/include/intellegent_bot.h">
+			<Option target="DZ"/>
+		</Unit>
 		<Unit filename="/home/bartem1us/bartem1us/warship/sources/game_ship.cpp">
 			<Option target="DZ"/>
 		</Unit>
