@@ -526,14 +526,78 @@ void game_field::move_shoot_left()
         visible_field[y][x] = 'x';
 
 }
+bool game_field::enemy_end_game() {
+    size_t win = 0;
+    for (size_t i = 0; i < my_field.size(); ++i) {
+        for (size_t k = 0; k < my_field[i].size(); ++k) {
+            if(my_field[i][k]=='X'){
+                ++win;
+            }
+        }
+    }
+    if(win==20)
+    {
+        def();
+        std::string end = "YOU WIN";
+        for(size_t i = 0 ; i<7 ; ++i)
+        {
+            my_field[5][2+i]=end[i];
+        }
+        shoot_display();
+        return true;
+    }
+    return false;
+
+}
+bool game_field::my_end_game()
+{
+    size_t win = 0;
+    for (size_t i = 0; i < shoot_field.size(); ++i) {
+        for (size_t k = 0; k < shoot_field[i].size(); ++k) {
+            if(shoot_field[i][k]=='X'){
+                ++win;
+            }
+        }
+    }
+    if(win==20)
+    {
+        def();
+        std::string end = "YOU WIN";
+        for(size_t i = 0 ; i<7 ; ++i)
+        {
+            shoot_field[5][2+i]=end[i];
+        }
+        shoot_display();
+        return true;
+    }
+    return false;
+}
+void game_field::enemy_shoot()
+{
+    size_t new_x =rand() % 10;
+    size_t new_y =rand() % 10 ;
+    if(my_field[new_y][new_x]== 'O')
+    {
+        my_field[new_y][new_x]='X';
+        my_display(120);
+        return;
+    }
+    else if(my_field[new_y][new_x]== '-')
+    {
+        my_field[new_y][new_x]='*';
+        my_display(120);
+        return;
+    }
+    else {enemy_shoot();}
+}
 void game_field::shoot() {
     for (size_t i = 0; i < visible_field.size(); ++i) {
         for (size_t k = 0; k < visible_field[i].size(); ++k) {
             visible_field[i][k] = '-';
         }
     }
-    bool pos = true;
-    while (pos != false) {
+    bool pos =false;
+    while (pos!= true) {
         int key = getch();
         switch (key) {
             case KEY_UP: {
@@ -556,30 +620,18 @@ void game_field::shoot() {
                 display();
                 break;
             }
-            case '+':
-            {
-                size_t win = 0 ;
-                if(enemy_field[y][x]== 'O')
-                {
-                    shoot_field[y][x]='X';
+            case '+': {
+                if (enemy_field[y][x] == 'O' && shoot_field[y][x]!='X'&&shoot_field[y][x]!='*' ){
+                    shoot_field[y][x] = 'X';
                     shoot_display();
+                    pos=true;
                     break;
                 }
-                if(enemy_field[y][x]== '-')
-                {
-                    shoot_field[y][x]='*';
+                if (enemy_field[y][x] == '-'&& shoot_field[y][x]!='X'&&shoot_field[y][x]!='*') {
+                    shoot_field[y][x] = '*';
                     shoot_display();
+                    pos =true;
                     break;
-                }
-                for (size_t i = 0; i < shoot_field.size(); ++i) {
-                    for (size_t k = 0; k < shoot_field[i].size(); ++k) {
-                        if(shoot_field[i][k]=='X'){
-                            ++win;
-                        }
-                    }
-                }
-                if(win==20){
-
                 }
                 break;
             }
@@ -593,23 +645,23 @@ void game_field::intellegent_desk() {
     }
     for(size_t i = 0 ; i <3  ; ++i)
     {
-        enemy_field[0][5+i]='0';
+        enemy_field[0][5+i]='O';
     }
     for(size_t i = 0 ; i <3  ; ++i)
     {
-        enemy_field[2][i]='0';
+        enemy_field[2][i]='O';
     }
     for(size_t i = 0 ; i <2  ; ++i)
     {
-        enemy_field[2][i+4]='0';
+        enemy_field[2][i+4]='O';
     }
     for(size_t i = 0 ; i <2  ; ++i)
     {
-        enemy_field[2][i+7]='0';
+        enemy_field[2][i+7]='O';
     }
     for(size_t i = 0 ; i <2  ; ++i)
     {
-        enemy_field[i+4][0]='0';
+        enemy_field[i+4][0]='O';
     }
     enemy_field[9][9]='O';
     enemy_field[7][7]='O';

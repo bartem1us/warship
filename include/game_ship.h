@@ -16,6 +16,9 @@ public:
     void my_display(int wide);
     void move_ship(size_t i);
     void def();
+    void enemy_shoot();
+    bool my_end_game();
+    bool enemy_end_game();
     void move_up_ship_vertical(size_t i);
     void move_down_ship_vertical(size_t i);
     void move_left_ship_vertical(size_t i);

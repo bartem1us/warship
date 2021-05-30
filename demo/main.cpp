@@ -31,10 +31,14 @@ int main()
     first.my_display(120);
     first.shoot_display();
     first.intellegent_desk();
-    first.shoot();
+    bool game =false;
+    while (game != true) {
+        first.shoot();
+        first.enemy_shoot();
+        game =first.my_end_game();
+        game = first.enemy_end_game();
 
-    getch();
-getch();
+    }
 getch();
     endwin();
 
