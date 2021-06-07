@@ -144,6 +144,7 @@ CMakeFiles/DZ.dir/sources/game_ship.cpp.o: \
  /usr/include/c++/9/bits/locale_facets.tcc \
  /usr/include/c++/9/bits/basic_ios.tcc \
  /usr/include/c++/9/bits/ostream.tcc /usr/include/c++/9/istream \
- /usr/include/c++/9/bits/istream.tcc /usr/include/curses.h \
- /usr/include/ncurses_dll.h /usr/include/unctrl.h /usr/include/curses.h \
- /usr/include/c++/9/cstring /usr/include/string.h /usr/include/strings.h
+ /usr/include/c++/9/bits/istream.tcc /usr/include/c++/9/array \
+ /usr/include/curses.h /usr/include/ncurses_dll.h /usr/include/unctrl.h \
+ /usr/include/curses.h /usr/include/c++/9/cstring /usr/include/string.h \
+ /usr/include/strings.h

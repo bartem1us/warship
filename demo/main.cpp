@@ -3,12 +3,14 @@
 #include "game_ship.h"
 int main()
 {
-
+    setlocale(LC_ALL, "Russian");
     if (!initscr()) {
         fprintf(stderr, "Error initialising ncurses.\n");
         exit(1);
     }
    game_field first ;
+    first.rules();
+    clear();
 
     first.def();
 
@@ -28,10 +30,11 @@ int main()
     first.move_ship(1);
     first.move_ship(1);
     first.move_ship(1);
-    first.my_display(120);
-    first.shoot_display();
+    first.display();
+
     first.intellegent_desk();
     bool game =false;
+
     while (game != true) {
         first.shoot();
         first.enemy_shoot();
@@ -39,7 +42,7 @@ int main()
         game = first.enemy_end_game();
 
     }
-getch();
+
     endwin();
 
 }

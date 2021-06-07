@@ -4,29 +4,46 @@
 
 void game_field::rules()
 {
-    std::vector<std::string>rules;
-    rules.push_back("Расстановка кораблей:");
-    rules.push_back("f1 - поставить корабль на место курсора");
-    rules.push_back("f2 - поменять расположение корабля (горизонтальное/вертикальное)");
-    rules.push_back(" Игра:");
-    rules.push_back("  f1 - выстрелить в данную клетку поля");
+
+    clear();
+
+    initscr();
+
+    int height = 23;
+    int width = 89;
+    int x = 30;
+    int y = 10;
+
+    WINDOW *help_win = newwin(height, width, y, x);
     refresh();
-    WINDOW *win = newwin(23, 41, 0, 0);
-    box(win, 0, 0);
-    start_color();
-    init_pair(1, COLOR_BLUE, A_NORMAL);
-    wattron(win, COLOR_PAIR(1));
+    box(help_win, 0, 0);
 
-    for (int i = 0; i < rules.size(); ++i) {
-        for (int j = 0; j < rules[i].size(); ++j) {
+    mvwprintw(help_win, 1, 1, "--------------------------------------- Rules ---------------------------------------");
+    mvwprintw(help_win, 2, 1, "1) The player has 4 types of ships:                                                 ");
+    mvwprintw(help_win, 3, 1, "   single-deck, double-deck, three-deck and four-deck:                               ");
+    mvwprintw(help_win, 4, 1, "   O, OO, OOO, OOOO - designation of the ships                                       ");
+    mvwprintw(help_win, 5, 1, "2) The distance between the ships must be at least 1 cell, including diagonally     ");
+    mvwprintw(help_win, 6, 1, "3) You can move ships using the keys: w - up, a - left, s - down, d - right         ");
+    mvwprintw(help_win, 7, 1, "4) To change the orientation of the ship, you need to press Insert                   ");
+    mvwprintw(help_win, 8, 1, "5) To put the ship on the field, you need to press '+'                               ");
+    mvwprintw(help_win, 9, 1, "6) After the player has placed his ships, two fields will appear in front of him:   ");
+    mvwprintw(help_win, 10, 1, "  the left one -his, right one - the enemy's field                                  ");
+    mvwprintw(help_win, 13, 1, "8) ! The player's task is to sink all enemy ships first !                          ");
+    mvwprintw(help_win, 14, 1, "-------------------------------------- Symbols --------------------------------------");
+    mvwprintw(help_win, 15, 1, "1) '-'  - water, free space,                                                       ");
+    mvwprintw(help_win, 16, 1, "2) 'O'  - ship (part of a ship),                                                   ");
+    mvwprintw(help_win, 17, 1, "3) '*'  - miss,                                                                    ");
+    mvwprintw(help_win, 18, 1, "4) '*'  - occupied space, in these places you cannot put,                          ");
+    mvwprintw(help_win, 19, 1, "5) 'X'  - shot at the ship (on the part of the ship)                               ");
+    mvwprintw(help_win, 20, 1, "-------------------------------------- End Rules ----------------------------------");
+    mvwprintw(help_win, 21, 1, "1)Press q to exit                                                                  ");
+    wrefresh(help_win);
 
-            mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", rules[i][j]);
-
-        }
+    while (true) {
+        int ch = getch();
+        if (ch == 'q') //Quit if q is pressed
+            break;
     }
-    use_default_colors();
-    wrefresh(win);
-    delwin(win);
 }
 void game_field::display() {
     refresh();
@@ -38,15 +55,14 @@ void game_field::display() {
 
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
-
-                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", visible_field[i][j]);
-
+            mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", visible_field[i][j]);
         }
     }
     use_default_colors();
     wrefresh(win);
     delwin(win);
 }
+
 
 void game_field::def() {
     visible_field.resize(10);
@@ -357,6 +373,13 @@ bool game_field::condition_horizontal(size_t i) {
         }
     }
     catch (std::out_of_range &e) {}
+    try {
+        char t = my_field.at(y + 1).at(x);
+        if (t == 'O') {
+            return false;
+        }
+    }
+    catch (std::out_of_range &e) {}
     return true;
 
 
@@ -400,8 +423,10 @@ void game_field::move_ship(size_t i) {
                         for (size_t k = 0; k < i; ++k) {
                             my_field[y + k][x] = visible_field[y + k][x];
                         }
-                        pos=false;
+                        pos = false;
                         my_display(60);
+                        x = 0;
+                        y = 0;
                         break;
                     } else { break; }
                 }
@@ -443,7 +468,9 @@ void game_field::move_ship(size_t i) {
                             my_field[y][x + k] = visible_field[y][x + k];
                         }
                         my_display(60);
-                        pos=false;
+                        pos = false;
+                        x = 0;
+                        y = 0;
                         break;
                     } else { break; }
                 }
@@ -453,23 +480,183 @@ void game_field::move_ship(size_t i) {
 
 }
 
+bool game_field::is_dead(const int x, const int y) const {
+    int curr_x = x;
+    int curr_y = y;
+    while (true) {
+        ++curr_y;
+        try {
+            if (enemy_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+            if (enemy_field.at(curr_x).at(curr_y) == 'O') {
+                return false;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    curr_y = y;
+    while (true) {
+        --curr_y;
+        try {
+            if (enemy_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+            if (enemy_field.at(curr_x).at(curr_y) == 'O') {
+                return false;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    curr_y = y;
+    while (true) {
+        --curr_x;
+        try {
+            if (enemy_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+            if (enemy_field.at(curr_x).at(curr_y) == 'O') {
+                return false;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    curr_x = x;
+    while (true) {
+        ++curr_x;
+        try {
+            if (enemy_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+            if (enemy_field.at(curr_x).at(curr_y) == 'O') {
+                return false;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    return true;
+}
+
+void game_field::AutoShoot(const int x, const int y) {
+    int curr_x = x;
+    int curr_y = y;
+    bool direction = false;
+    while (true) {
+        --curr_y;
+        try {
+            if (visible_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    ++curr_y;
+
+    while (true) {
+        --curr_x;
+        try {
+            if (visible_field.at(curr_x).at(curr_y) == '-' || visible_field.at(curr_x).at(curr_y) == '*') {
+                break;
+            }
+        } catch (std::out_of_range &e) {
+            break;
+        }
+    }
+    ++curr_x;
+
+    try {
+        if (visible_field.at(curr_x + 1).at(curr_y) == 'X') {
+            direction = true;
+        }
+    } catch (std::out_of_range &e) {}
+    if (direction) {
+        for (int i = -1; i < 2; ++i) {
+            try {
+                visible_field.at(curr_x - 1).at(curr_y + i) = '*';
+            } catch (std::out_of_range &e) {}
+        }
+        while (true) {
+            try {
+                if (visible_field.at(curr_x).at(curr_y) == '-' ||
+                    visible_field.at(curr_x).at(curr_y) == '*') {
+                    break;
+                }
+            } catch (std::out_of_range &e) {
+                break;
+            }
+            visible_field[curr_x][curr_y] = 'X';
+            try {
+                visible_field.at(curr_x).at(curr_y + 1) = '*';
+            } catch (std::out_of_range &e) {}
+            try {
+                visible_field.at(curr_x).at(curr_y - 1) = '*';
+            } catch (std::out_of_range &e) {}
+            ++curr_x;
+        }
+        for (int i = -1; i < 2; ++i) {
+            try {
+                visible_field.at(curr_x).at(curr_y + i) = '*';
+            } catch (std::out_of_range &e) {}
+        }
+    } else {
+        for (int i = -1; i < 2; ++i) {
+            try {
+                visible_field.at(curr_x + i).at(curr_y - 1) = '*';
+            } catch (std::out_of_range &e) {}
+        }
+        while (true) {
+            try {
+                if (visible_field.at(curr_x).at(curr_y) == '-' ||
+                    visible_field.at(curr_x).at(curr_y) == '*') {
+                    break;
+                }
+            } catch (std::out_of_range &e) {
+                break;
+            }
+            visible_field[curr_x][curr_y] = 'X';
+            try {
+                visible_field.at(curr_x + 1).at(curr_y) = '*';
+            } catch (std::out_of_range &e) {}
+            try {
+                visible_field.at(curr_x - 1).at(curr_y) = '*';
+            } catch (std::out_of_range &e) {}
+            ++curr_y;
+        }
+        for (int i = -1; i < 2; ++i) {
+            try {
+                visible_field.at(curr_x + i).at(curr_y) = '*';
+            } catch (std::out_of_range &e) {}
+        }
+    }
+
+}
+
 
 void game_field::shoot_display() {
     refresh();
-    WINDOW *win = newwin(23, 41, 0, 60);
+    WINDOW *win = newwin(23, 41, 0, 0);
     box(win, 0, 0);
     start_color();
     init_pair(1, COLOR_BLUE, A_NORMAL);
-    wattron(win, COLOR_PAIR(1));
+    init_pair(2, A_NORMAL, COLOR_RED);
+
 
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
-
-            if (i == x && j == y) {
-                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", shoot_field[i][j]);
-
+            wattron(win, COLOR_PAIR(1));
+            if (i == y && j == x) {
+                wattron(win, COLOR_PAIR(2));
+                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", visible_field[i][j]);
+                wattroff(win, COLOR_PAIR(2));
             } else {
-                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", shoot_field[i][j]);
+                wattron(win, COLOR_PAIR(1));
+                mvwprintw(win, 2 * i + 2, 4 * j + 2, "%c", visible_field[i][j]);
+                wattroff(win, COLOR_PAIR(1));
             }
         }
     }
@@ -481,12 +668,7 @@ void game_field::move_shoot_up() {
     if (y != 0) {
         --y;
     }
-    for (size_t i = 0; i < visible_field.size(); ++i) {
-        for (size_t k = 0; k < visible_field[i].size(); ++k) {
-            visible_field[i][k] = '-';
-        }
-    }
-        visible_field[y][x] = 'x';
+
 
 }
 void game_field::move_shoot_down()
@@ -494,143 +676,198 @@ void game_field::move_shoot_down()
     if (y != 9) {
         ++y;
     }
-    for (size_t i = 0; i < visible_field.size(); ++i) {
-        for (size_t k = 0; k < visible_field[i].size(); ++k) {
-            visible_field[i][k] = '-';
-        }
-    }
-        visible_field[y][x] = 'x';
 }
+
 void game_field::move_shoot_right() {
     if (x != 9) {
         ++x;
     }
-    for (size_t i = 0; i < visible_field.size(); ++i) {
-        for (size_t k = 0; k < visible_field[i].size(); ++k) {
-            visible_field[i][k] = '-';
-        }
-    }
-        visible_field[y][x] = 'x';
+
 
 }
-void game_field::move_shoot_left()
-{
+
+void game_field::move_shoot_left() {
     if (x != 0) {
         --x;
     }
-    for (size_t i = 0; i < visible_field.size(); ++i) {
-        for (size_t k = 0; k < visible_field[i].size(); ++k) {
-            visible_field[i][k] = '-';
-        }
-    }
-        visible_field[y][x] = 'x';
 
 }
+
+bool game_field::my_end_game() {
+    size_t win = 0;
+    for (size_t i = 0; i < visible_field.size(); ++i) {
+        for (size_t k = 0; k < visible_field[i].size(); ++k) {
+            if (visible_field[i][k] == 'X') {
+                ++win;
+            }
+        }
+    }
+    if (win == 20) {
+        clear();
+
+        initscr();
+
+        int height = 13;
+        int width = 89;
+        int x = 30;
+        int y = 10;
+
+        WINDOW *help_win = newwin(height, width, y, x);
+        refresh();
+        box(help_win, 0, 0);
+
+        mvwprintw(help_win, 1, 1,
+                  "------------------------------------ Game is end ------------------------------------");
+        mvwprintw(help_win, 2, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 3, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 4, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 5, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 6, 1,
+                  "------------------------------------ Player win -------------------------------------");
+        mvwprintw(help_win, 7, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 8, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 9, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 10, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 11, 1,
+                  "-------------------------------------------------------------------------------------");
+
+        wrefresh(help_win);
+
+        while (true) {
+            int ch = getch();
+            if (ch == 'q') //Quit if q is pressed
+                break;
+        }
+        return true;
+    }
+    return false;
+}
+
 bool game_field::enemy_end_game() {
     size_t win = 0;
     for (size_t i = 0; i < my_field.size(); ++i) {
         for (size_t k = 0; k < my_field[i].size(); ++k) {
-            if(my_field[i][k]=='X'){
+            if (my_field[i][k] == 'X') {
                 ++win;
             }
         }
     }
-    if(win==20)
-    {
-        def();
-        std::string end = "YOU WIN";
-        for(size_t i = 0 ; i<7 ; ++i)
-        {
-            my_field[5][2+i]=end[i];
-        }
-        shoot_display();
-        return true;
-    }
-    return false;
+    if (win == 20) {
+        clear();
 
-}
-bool game_field::my_end_game()
-{
-    size_t win = 0;
-    for (size_t i = 0; i < shoot_field.size(); ++i) {
-        for (size_t k = 0; k < shoot_field[i].size(); ++k) {
-            if(shoot_field[i][k]=='X'){
-                ++win;
-            }
+        initscr();
+
+        int height = 14;
+        int width = 89;
+        int x = 30;
+        int y = 10;
+
+        WINDOW *help_win = newwin(height, width, y, x);
+        refresh();
+        box(help_win, 0, 0);
+
+        mvwprintw(help_win, 1, 1,
+                  "------------------------------------ Game is end ------------------------------------");
+        mvwprintw(help_win, 2, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 3, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 4, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 5, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 6, 1,
+                  "-------------------------------------- AI win ---------------------------------------");
+        mvwprintw(help_win, 7, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 8, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 9, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 10, 1,
+                  "-------------------------------------------------------------------------------------");
+        mvwprintw(help_win, 13, 1,
+                  "-------------------------------------------------------------------------------------");
+
+        wrefresh(help_win);
+
+        while (true) {
+            int ch = getch();
+            if (ch == 'q') //Quit if q is pressed
+                break;
         }
-    }
-    if(win==20)
-    {
-        def();
-        std::string end = "YOU WIN";
-        for(size_t i = 0 ; i<7 ; ++i)
-        {
-            shoot_field[5][2+i]=end[i];
-        }
-        shoot_display();
         return true;
     }
     return false;
 }
-void game_field::enemy_shoot()
-{
-    size_t new_x =rand() % 10;
-    size_t new_y =rand() % 10 ;
-    if(my_field[new_y][new_x]== 'O')
-    {
-        my_field[new_y][new_x]='X';
-        my_display(120);
+
+void game_field::enemy_shoot() {
+    size_t new_x = rand() % 10;
+    size_t new_y = rand() % 10;
+    if (my_field[new_y][new_x] == 'O') {
+        my_field[new_y][new_x] = 'X';
+        
+        my_display(60);
         return;
-    }
-    else if(my_field[new_y][new_x]== '-')
-    {
-        my_field[new_y][new_x]='*';
-        my_display(120);
+    } else if (my_field[new_y][new_x] == '-') {
+        my_field[new_y][new_x] = '*';
+        my_display(60);
         return;
-    }
-    else {enemy_shoot();}
+    } else { enemy_shoot(); }
 }
+
+
 void game_field::shoot() {
-    for (size_t i = 0; i < visible_field.size(); ++i) {
-        for (size_t k = 0; k < visible_field[i].size(); ++k) {
-            visible_field[i][k] = '-';
-        }
-    }
-    bool pos =false;
-    while (pos!= true) {
+    refresh();
+    bool pos = false;
+    while (pos != true) {
         int key = getch();
         switch (key) {
             case KEY_UP: {
                 move_shoot_up();
-                display();
+                shoot_display();
                 break;
             }
             case KEY_DOWN: {
                 move_shoot_down();
-                display();
+                shoot_display();
                 break;
             }
             case KEY_RIGHT: {
                 move_shoot_right();
-                display();
+                shoot_display();
                 break;
             }
             case KEY_LEFT: {
                 move_shoot_left();
-                display();
+                shoot_display();
                 break;
             }
             case '+': {
-                if (enemy_field[y][x] == 'O' && shoot_field[y][x]!='X'&&shoot_field[y][x]!='*' ){
-                    shoot_field[y][x] = 'X';
+                if (enemy_field[y][x] == 'O' && visible_field[y][x] != 'X' && visible_field[y][x] != '*') {
+                    visible_field[y][x] = 'X';
+                    enemy_field[y][x] = 'X';
                     shoot_display();
-                    pos=true;
+                    if (is_dead(y, x)) {
+                        AutoShoot(y,x);
+                        shoot_display();
+                    }
+                    pos = true;
                     break;
                 }
-                if (enemy_field[y][x] == '-'&& shoot_field[y][x]!='X'&&shoot_field[y][x]!='*') {
-                    shoot_field[y][x] = '*';
+                if (enemy_field[y][x] == '-' && visible_field[y][x] != 'X' && visible_field[y][x] != '*') {
+                    visible_field[y][x] = '*';
+                    enemy_field[y][x] = '*';
                     shoot_display();
-                    pos =true;
+                    pos = true;
                     break;
                 }
                 break;
@@ -638,6 +875,8 @@ void game_field::shoot() {
         }
     }
 }
+
+
 void game_field::intellegent_desk() {
     for(size_t i = 0 ; i <4  ; ++i)
     {
